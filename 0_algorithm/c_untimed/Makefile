@@ -3,7 +3,7 @@
 # Author: goodkook@gmail.com
 #
 
-SRCS = fir8.c fir8_tb.c calcDFT.c cnoise.c
+SRCS = fir8.cpp fir8_tb.cpp calcDFT.cpp cnoise.cpp
 HDRS = fir8.h cnoise.h
 EXEC = fir8_tb
 

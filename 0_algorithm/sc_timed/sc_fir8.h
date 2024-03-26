@@ -9,12 +9,18 @@ History : Mar. 2024, First release
 #define  _SC_FIR8_H_
 
 #include <systemc.h>
+
 #ifdef VERILATED
 #include "V_fir_pe.h"
-#else
+#endif
+#ifdef MTI_SIM
+#include "fir_pe.h"
+#endif
+#if !defined(VERILATED) && !defined(MTI_SIM)
 #include "sc_fir_pe.h"
 #endif
-#include "../c/fir8.h"
+
+#include "../c_untimed/fir8.h"
 
 #define N_PE_ARRAY  8
 
@@ -31,10 +37,15 @@ SC_MODULE(sc_fir8)
 //    }
 
 #ifdef VERILATED
-    V_fir_pe*              u_fir_pe[N_PE_ARRAY];
-#else
-    sc_fir_pe*              u_fir_pe[N_PE_ARRAY];
+    V_fir_pe*       u_fir_pe[N_PE_ARRAY];
 #endif
+#ifdef MTI_SIM
+    fir_pe*         u_fir_pe[N_PE_ARRAY];
+#endif
+#if !defined(VERILATED) && !defined(MTI_SIM)
+    sc_fir_pe*      u_fir_pe[N_PE_ARRAY];
+#endif
+
     sc_signal<sc_uint<8> >  X[N_PE_ARRAY-1];    // X-input
     sc_signal<sc_uint<16> > Y[N_PE_ARRAY-1];    // Accumulated
     sc_signal<sc_uint<8> >  C[N_PE_ARRAY];      // Filter-Tabs Coeff
@@ -60,7 +71,11 @@ SC_MODULE(sc_fir8)
             sprintf(szPeName, "u_PE_%d", i);
 #ifdef VERILATED
             u_fir_pe[i] = new V_fir_pe(szPeName);
-#else
+#endif
+#ifdef MTI_SIM
+            u_fir_pe[i] = new fir_pe(szPeName);
+#endif
+#if !defined(VERILATED) && !defined(MTI_SIM)
             u_fir_pe[i] = new sc_fir_pe(szPeName);
 #endif
             C[i].write(sc_uint<8>(filter_taps[i]));

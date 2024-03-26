@@ -10,12 +10,17 @@ History : Mar. 2024, First release
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
-#include "../c/fir8.h"
-#include "../c/cnoise.h"
+#include "../c_untimed/fir8.h"
 
 #define AMPLITUDE       120.0
-#define NOISE_RANGE     AMPLITUDE/2.0
 #define OUT_TRUNCATE    0
+
+#ifndef MTI_SIM
+#define NOISE_RANGE     AMPLITUDE/2.0
+#include "../c_untimed/cnoise.h"
+#else
+#define NOISE_RANGE     0.0
+#endif
 
 void sc_fir8_tb::Test_Gen()
 {
@@ -23,9 +28,14 @@ void sc_fir8_tb::Test_Gen()
     uint16_t    yn;
     int         t = 0;
 
+#ifndef MTI_SIM
     // Generate tests & reference from C-Model 
     srand(time(NULL));
     cnoise_generate_colored_noise_uniform( X_in, F_SAMPLE, 0, NOISE_RANGE ); // Alpha=0(White Noise), range=+/-NOISE_RANGE
+#else
+    for (int i=0; i<F_SAMPLE; i++)  X_in[i] = 0.0;
+#endif
+
     for (t=0; t<F_SAMPLE; t++)
     {
         x[t] =  sc_uint<8>(AMPLITUDE/16.0*(cos((2*M_PI/F_SAMPLE) *   51.0 * t + (float)(rand() %  10)/ 10.0)+1))

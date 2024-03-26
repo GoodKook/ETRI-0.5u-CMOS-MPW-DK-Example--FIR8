@@ -18,7 +18,7 @@ History  : Mar. 2024, First Release
 
 void calcDFT(uint16_t *xn, uint16_t len, uint16_t N, double *Xr, double *Xi);
 
-void main()
+int main(void)
 {
     data_t  x[F_SAMPLE];
     acc_t   y[F_SAMPLE], yn;
@@ -50,5 +50,7 @@ void main()
         printf("%d %d %5.3f %d %5.3f\n", i,
                     x[i], log((double)(Xr[i]*Xr[i]+Xi[i]*Xi[i])),
                     y[i], log((double)(Yr[i]*Yr[i]+Yi[i]*Yi[i]))
-        ); 
+        );
+
+    return 0;
 }

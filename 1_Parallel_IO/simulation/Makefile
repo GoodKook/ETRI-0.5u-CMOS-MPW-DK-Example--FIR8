@@ -8,14 +8,14 @@ export CXX				= clang++
 export CXXFLAGS			= -std=c++17
 
 # SystemC testbench Reuse --------------------------------------
-SC_SRCS      =  ../../0_algorithm/sc/sc_main.cpp \
-				../../0_algorithm/sc/sc_fir8_tb.cpp \
-				../../0_algorithm/c/fir8.c \
-				../../0_algorithm/c/cnoise.c
-SC_HDRS      =  ../../0_algorithm/sc/sc_fir8.h \
-				../../0_algorithm/sc/sc_fir8_tb.h \
+SC_SRCS      =  ../../0_algorithm/sc_timed/sc_main.cpp \
+				../../0_algorithm/sc_timed/sc_fir8_tb.cpp \
+				../../0_algorithm/c_untimed/fir8.cpp \
+				../../0_algorithm/c_untimed/cnoise.cpp
+SC_HDRS      =  ../../0_algorithm/sc_timed/sc_fir8.h \
+				../../0_algorithm/sc_timed/sc_fir8_tb.h \
 				./V_fir_pe.h
-SC_INC		= -I. -I../../0_algorithm/c -I../../0_algorithm/sc
+SC_INC		= -I. -I../../0_algorithm/c_untimed -I../../0_algorithm/sc_timed
 
 # Verilator vars -----------------------------------------------
 VERILOG_SRCS =  ../source/fir_pe.v
@@ -52,7 +52,7 @@ lint : $(VERILOG_SRCS) $(SC_SRCS) $(SC_HDRS)
 
 run : $(TARGET_DIR)/$(TARGET)
 	./$(TARGET_DIR)/$(TARGET)
-	../../0_algorithm/sc/sc_plotDFT.py &
+	../../0_algorithm/sc_timed/sc_plotDFT.py &
 	gtkwave sc_fir8.vcd --save=sc_fir8.gtkw &
 
 clean :
@@ -66,23 +66,21 @@ clean_all :
 	rm -f transcript
 	rm -f *.wlf
 	rm -f *.vcd
+	rm -f *.vstf
 
 debug : $(TARGET_DIR)/$(TARGET)
 	ddd $(TARGET_DIR)/$(TARGET)
-
-wave: sc_VALU_wrapper.vcd
-	gtkwave sc_VALU_wrapper.vcd &
 
 # ===========================================================
 
 mti_fun_build : $(VERILOG_SRCS) $(SC_SRCS) $(SC_TOP_H)
 	vsim -c -do ./mti_sim/compile_fun.do
 
-mti_net_build : ../synthesis/$(TOP_MODULE).v
-	vsim -c -do ./mti_sim/compile_net.do
-
 mti_fun_run :
 	vsim -c -do ./mti_sim/simulate_fun.do
+
+mti_net_build : ../synthesis/$(TOP_MODULE).v
+	vsim -c -do ./mti_sim/compile_net.do
 
 mti_net_run :
 	vsim -c -do ./mti_sim/simulate_net.do
