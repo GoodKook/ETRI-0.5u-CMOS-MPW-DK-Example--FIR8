@@ -8,27 +8,29 @@ Design & Get Coefficients at T-Filter</br>
 </br>
 Untimed C-Code:</br>
 ---------------
-&nbsp;Filter Tab Coefficients,</br>
-        https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/c_untimed/fir8.h</br>
-    Filter Kernel,</br>
-        https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/c_untimed/fir8.cpp</br>
+Filter Tab Coefficients,</br>
+https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/c_untimed/fir8.h</br>
+Filter Kernel,</br>
+https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/c_untimed/fir8.cpp</br>
 Testbench:</br>
-    https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/c_untimed/fir8_tb.cpp</br>
+https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/c_untimed/fir8_tb.cpp</br>
 </br>
 Timed SystemC code:</br>
-    Processing-Element,</br>
-        https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_timed/sc_fir_pe.h</br>
-    Pipelined-Array of 8-PEs,</br>
-        https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_timed/sc_fir8.h</br>
-Testbench:</br>
-    Test vector generator & Output compare,</br>
-        https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_timed/sc_fir8_tb.h</br>
-        https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_timed/sc_fir8_tb.cpp</br>
+-------------------</br>
+Processing-Element,</br>
+https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_timed/sc_fir_pe.h</br>
+Pipelined-Array of 8-PEs,</br>
+https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_timed/sc_fir8.h</br>
+Testbench: generate test input & compare filter timed output with untimed,</br>
+https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_timed/sc_fir8_tb.h</br>
+https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_timed/sc_fir8_tb.cpp</br>
 </br>
-Algorithm simulation
-![sc_fir8_tb](https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/assets/162967523/1dbf244c-09db-4b3f-b2b8-ee2d15f0c80e)
-
-Architecture:
-    Pipelined Array:
+Analysis simulation result:</br>
+---------------------------</br>
+![sc_fir8_tb](https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/assets/162967523/1dbf244c-09db-4b3f-b2b8-ee2d15f0c80e)</br>
+</br>
+Architecture:</br>
+-------------
+Pipelined Array:
 ![Ch2_3-2d](https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/assets/162967523/22160900-b4b9-4ba0-8155-bf709eb11cdd)
 
