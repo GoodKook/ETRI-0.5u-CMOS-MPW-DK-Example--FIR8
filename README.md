@@ -32,7 +32,7 @@ Processing-Element in Verilog,</br>
 https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/1_Parallel_IO/source/fir_pe.v</br>
 Pipelined-Array of 8-PEs,</br>
 https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_timed/sc_fir8.h</br>
-Testbench: generate test input & compare filter timed output with untimed,</br>
+Testbench: generate test input & compare timed filter output with untimed,</br>
 https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_timed/sc_fir8_tb.h</br>
 https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_timed/sc_fir8_tb.cpp</br>
 </br>
