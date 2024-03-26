@@ -36,6 +36,9 @@ Testbench: generate test input & compare timed filter output with untimed,</br>
 https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_timed/sc_fir8_tb.h</br>
 https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_timed/sc_fir8_tb.cpp</br>
 </br>
+RTL Simulation</br>
+![RTL_Simulation](https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/assets/162967523/3f50254c-bc0c-4543-8500-f4eb474d75bc)</br>
+</br>
 ## ISSUES:</br>
 The Verilog PE meets core-size of 1000x1000um, but pad-limited! ETRI/MyChip MPW restricts to only 28-pins including power.</br>
 </br>
