@@ -37,5 +37,5 @@ https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algo
 https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_timed/sc_fir8_tb.cpp</br>
 </br>
 ISSUES:</br>
-The Verilog PE meets core-size of 1000x1000um, but Pad limited! ETRI/MyChip MPW only provides 28-pins including power.</br>
+The Verilog PE meets core-size of 1000x1000um, but pad-limited! ETRI/MyChip MPW only provides 28-pins including power.</br>
 
