@@ -16,6 +16,10 @@ https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algo
 </br>
 ## Analysis simulation result:</br>
 ![sc_fir8_tb](https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/assets/162967523/1dbf244c-09db-4b3f-b2b8-ee2d15f0c80e)</br>
+Python code:</br>
+https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_timed/sc_plotDFT.py</br>
+Makefile:</br>
+https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_timed/Makefile
 </br>
 ## Architecture:</br>
 Pipelined Array:</br>
