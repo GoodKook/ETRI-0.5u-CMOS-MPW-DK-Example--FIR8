@@ -14,6 +14,7 @@ VL_INLINE_OPT void Vfir_pe___024root___ico_sequent__TOP__0(Vfir_pe___024root* vl
     VL_ASSIGN_ISI(8,vlSelf->__Vcellinp__fir_pe__Cin, vlSelf->Cin);
     VL_ASSIGN_ISI(4,vlSelf->__Vcellinp__fir_pe__Xin, vlSelf->Xin);
     VL_ASSIGN_ISI(4,vlSelf->__Vcellinp__fir_pe__Yin, vlSelf->Yin);
+    VL_ASSIGN_ISI(1,vlSelf->__Vcellinp__fir_pe__Rdy, vlSelf->Rdy);
 }
 
 void Vfir_pe___024root___eval_ico(Vfir_pe___024root* vlSelf) {
@@ -54,42 +55,97 @@ VL_INLINE_OPT void Vfir_pe___024root___nba_sequent__TOP__0(Vfir_pe___024root* vl
     Vfir_pe__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vfir_pe___024root___nba_sequent__TOP__0\n"); );
     // Init
-    SData/*15:0*/ __Vdly__fir_pe__DOT__y3;
-    __Vdly__fir_pe__DOT__y3 = 0;
+    CData/*3:0*/ __Vcellout__fir_pe__Yout;
+    __Vcellout__fir_pe__Yout = 0;
+    CData/*3:0*/ __Vcellout__fir_pe__Xout;
+    __Vcellout__fir_pe__Xout = 0;
+    CData/*0:0*/ fir_pe__DOT____Vlvbound_hd86132fa__0;
+    fir_pe__DOT____Vlvbound_hd86132fa__0 = 0;
+    CData/*4:0*/ __Vdly__fir_pe__DOT__LoadCtl;
+    __Vdly__fir_pe__DOT__LoadCtl = 0;
     // Body
-    __Vdly__fir_pe__DOT__y3 = vlSelf->fir_pe__DOT__y3;
-    __Vdly__fir_pe__DOT__y3 = vlSelf->fir_pe__DOT__y2;
-    vlSelf->__Vcellout__fir_pe__Yout = (0xfU & (IData)(vlSelf->fir_pe__DOT__y3));
-    __Vdly__fir_pe__DOT__y3 = ((0xf000U & (IData)(__Vdly__fir_pe__DOT__y3)) 
-                               | (0xfffU & ((IData)(vlSelf->fir_pe__DOT__y3) 
-                                            >> 4U)));
-    vlSelf->__Vcellout__fir_pe__Xout = vlSelf->fir_pe__DOT__XinL;
-    vlSelf->fir_pe__DOT__y3 = __Vdly__fir_pe__DOT__y3;
-    vlSelf->fir_pe__DOT__y2 = vlSelf->fir_pe__DOT__y1;
-    VL_ASSIGN_SII(4,vlSelf->Yout, vlSelf->__Vcellout__fir_pe__Yout);
-    VL_ASSIGN_SII(4,vlSelf->Xout, vlSelf->__Vcellout__fir_pe__Xout);
-    vlSelf->fir_pe__DOT__y1 = vlSelf->fir_pe__DOT__y0;
-    vlSelf->fir_pe__DOT__y0 = vlSelf->fir_pe__DOT__y;
-    vlSelf->fir_pe__DOT__y = (0xffffU & (((((IData)(vlSelf->fir_pe__DOT__XinH) 
-                                            << 4U) 
-                                           | (IData)(vlSelf->fir_pe__DOT__XinL)) 
-                                          * (IData)(vlSelf->__Vcellinp__fir_pe__Cin)) 
-                                         + (((IData)(vlSelf->fir_pe__DOT__Yin3) 
-                                             << 0xcU) 
-                                            | (((IData)(vlSelf->fir_pe__DOT__Yin2) 
-                                                << 8U) 
-                                               | (((IData)(vlSelf->fir_pe__DOT__Yin1) 
-                                                   << 4U) 
-                                                  | (IData)(vlSelf->fir_pe__DOT__Yin0))))));
-    vlSelf->fir_pe__DOT__Yin0 = vlSelf->fir_pe__DOT__Yin1;
-    vlSelf->fir_pe__DOT__XinL = vlSelf->fir_pe__DOT__XinH;
-    vlSelf->fir_pe__DOT__XinL = vlSelf->fir_pe__DOT___XinL;
-    vlSelf->fir_pe__DOT__Yin1 = vlSelf->fir_pe__DOT__Yin2;
-    vlSelf->fir_pe__DOT___XinL = vlSelf->fir_pe__DOT__XinH;
-    vlSelf->fir_pe__DOT__Yin2 = vlSelf->fir_pe__DOT__Yin3;
-    vlSelf->fir_pe__DOT__XinH = vlSelf->fir_pe__DOT___XinH;
-    vlSelf->fir_pe__DOT__Yin3 = vlSelf->__Vcellinp__fir_pe__Yin;
-    vlSelf->fir_pe__DOT___XinH = vlSelf->__Vcellinp__fir_pe__Xin;
+    __Vdly__fir_pe__DOT__LoadCtl = vlSelf->fir_pe__DOT__LoadCtl;
+    __Vdly__fir_pe__DOT__LoadCtl = ((0x1eU & (IData)(__Vdly__fir_pe__DOT__LoadCtl)) 
+                                    | (IData)(vlSelf->__Vcellinp__fir_pe__Rdy));
+    fir_pe__DOT____Vlvbound_hd86132fa__0 = (1U & (IData)(vlSelf->fir_pe__DOT__LoadCtl));
+    __Vdly__fir_pe__DOT__LoadCtl = ((0x1dU & (IData)(__Vdly__fir_pe__DOT__LoadCtl)) 
+                                    | ((IData)(fir_pe__DOT____Vlvbound_hd86132fa__0) 
+                                       << 1U));
+    fir_pe__DOT____Vlvbound_hd86132fa__0 = (1U & ((IData)(vlSelf->fir_pe__DOT__LoadCtl) 
+                                                  >> 1U));
+    __Vdly__fir_pe__DOT__LoadCtl = ((0x1bU & (IData)(__Vdly__fir_pe__DOT__LoadCtl)) 
+                                    | ((IData)(fir_pe__DOT____Vlvbound_hd86132fa__0) 
+                                       << 2U));
+    fir_pe__DOT____Vlvbound_hd86132fa__0 = (1U & ((IData)(vlSelf->fir_pe__DOT__LoadCtl) 
+                                                  >> 2U));
+    __Vdly__fir_pe__DOT__LoadCtl = ((0x17U & (IData)(__Vdly__fir_pe__DOT__LoadCtl)) 
+                                    | ((IData)(fir_pe__DOT____Vlvbound_hd86132fa__0) 
+                                       << 3U));
+    fir_pe__DOT____Vlvbound_hd86132fa__0 = (1U & ((IData)(vlSelf->fir_pe__DOT__LoadCtl) 
+                                                  >> 3U));
+    __Vdly__fir_pe__DOT__LoadCtl = ((0xfU & (IData)(__Vdly__fir_pe__DOT__LoadCtl)) 
+                                    | ((IData)(fir_pe__DOT____Vlvbound_hd86132fa__0) 
+                                       << 4U));
+    if ((0x10U & (IData)(vlSelf->fir_pe__DOT__LoadCtl))) {
+        vlSelf->fir_pe__DOT__y = vlSelf->fir_pe__DOT___y;
+        vlSelf->fir_pe__DOT___y = (0xffffU & (((((IData)(vlSelf->fir_pe__DOT__XinH) 
+                                                 << 4U) 
+                                                | (IData)(vlSelf->fir_pe__DOT__XinL)) 
+                                               * (IData)(vlSelf->__Vcellinp__fir_pe__Cin)) 
+                                              + (((IData)(vlSelf->fir_pe__DOT__Yin3) 
+                                                  << 0xcU) 
+                                                 | (((IData)(vlSelf->fir_pe__DOT__Yin2) 
+                                                     << 8U) 
+                                                    | (((IData)(vlSelf->fir_pe__DOT__Yin1) 
+                                                        << 4U) 
+                                                       | (IData)(vlSelf->fir_pe__DOT__Yin0))))));
+    }
+    if ((1U & (~ (IData)(vlSelf->fir_pe__DOT__LoadCtl)))) {
+        if ((1U & (~ ((IData)(vlSelf->fir_pe__DOT__LoadCtl) 
+                      >> 1U)))) {
+            if ((1U & (~ ((IData)(vlSelf->fir_pe__DOT__LoadCtl) 
+                          >> 2U)))) {
+                if ((8U & (IData)(vlSelf->fir_pe__DOT__LoadCtl))) {
+                    vlSelf->fir_pe__DOT__Yin3 = vlSelf->__Vcellinp__fir_pe__Yin;
+                }
+            }
+            if ((4U & (IData)(vlSelf->fir_pe__DOT__LoadCtl))) {
+                vlSelf->fir_pe__DOT__Yin2 = vlSelf->__Vcellinp__fir_pe__Yin;
+            }
+        }
+        if ((2U & (IData)(vlSelf->fir_pe__DOT__LoadCtl))) {
+            vlSelf->fir_pe__DOT__Yin1 = vlSelf->__Vcellinp__fir_pe__Yin;
+            vlSelf->fir_pe__DOT__XinH = vlSelf->__Vcellinp__fir_pe__Xin;
+        }
+    }
+    if ((1U & (IData)(vlSelf->fir_pe__DOT__LoadCtl))) {
+        vlSelf->fir_pe__DOT__Yin0 = vlSelf->__Vcellinp__fir_pe__Yin;
+        vlSelf->fir_pe__DOT__XinL = vlSelf->__Vcellinp__fir_pe__Xin;
+    }
+    vlSelf->fir_pe__DOT__LoadCtl = __Vdly__fir_pe__DOT__LoadCtl;
+    if ((1U & (IData)(vlSelf->fir_pe__DOT__LoadCtl))) {
+        __Vcellout__fir_pe__Yout = (0xfU & (IData)(vlSelf->fir_pe__DOT__y));
+        __Vcellout__fir_pe__Xout = vlSelf->fir_pe__DOT__XinL;
+    } else if ((2U & (IData)(vlSelf->fir_pe__DOT__LoadCtl))) {
+        __Vcellout__fir_pe__Yout = (0xfU & ((IData)(vlSelf->fir_pe__DOT__y) 
+                                            >> 4U));
+        __Vcellout__fir_pe__Xout = vlSelf->fir_pe__DOT__XinH;
+    } else {
+        __Vcellout__fir_pe__Yout = (0xfU & ((4U & (IData)(vlSelf->fir_pe__DOT__LoadCtl))
+                                             ? ((IData)(vlSelf->fir_pe__DOT__y) 
+                                                >> 8U)
+                                             : ((8U 
+                                                 & (IData)(vlSelf->fir_pe__DOT__LoadCtl))
+                                                 ? 
+                                                ((IData)(vlSelf->fir_pe__DOT__y) 
+                                                 >> 0xcU)
+                                                 : 0U)));
+        __Vcellout__fir_pe__Xout = 0U;
+    }
+    VL_ASSIGN_SII(1,vlSelf->Vld, (1U & ((IData)(vlSelf->fir_pe__DOT__LoadCtl) 
+                                        >> 4U)));
+    VL_ASSIGN_SII(4,vlSelf->Yout, __Vcellout__fir_pe__Yout);
+    VL_ASSIGN_SII(4,vlSelf->Xout, __Vcellout__fir_pe__Xout);
 }
 
 void Vfir_pe___024root___eval_nba(Vfir_pe___024root* vlSelf) {

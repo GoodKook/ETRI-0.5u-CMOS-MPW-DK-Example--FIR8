@@ -16,6 +16,8 @@ Vfir_pe___024root::Vfir_pe___024root(Vfir_pe__Syms* symsp, const char* v__name)
     , Xout("Xout")
     , Yin("Yin")
     , Yout("Yout")
+    , Rdy("Rdy")
+    , Vld("Vld")
     , vlSymsp{symsp}
  {
     // Reset structure values

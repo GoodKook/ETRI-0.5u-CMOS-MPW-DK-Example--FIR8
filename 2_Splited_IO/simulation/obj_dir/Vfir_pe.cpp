@@ -15,6 +15,8 @@ Vfir_pe::Vfir_pe(sc_core::sc_module_name /* unused */)
     , Xout{vlSymsp->TOP.Xout}
     , Yin{vlSymsp->TOP.Yin}
     , Yout{vlSymsp->TOP.Yout}
+    , Rdy{vlSymsp->TOP.Rdy}
+    , Vld{vlSymsp->TOP.Vld}
     , rootp{&(vlSymsp->TOP)}
 {
     // Register model with the context
@@ -25,6 +27,7 @@ Vfir_pe::Vfir_pe(sc_core::sc_module_name /* unused */)
     sensitive << Cin;
     sensitive << Xin;
     sensitive << Yin;
+    sensitive << Rdy;
 
 }
 

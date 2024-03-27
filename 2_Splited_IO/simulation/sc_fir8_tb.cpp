@@ -56,17 +56,25 @@ void sc_fir8_tb::Test_Gen()
 
     while(true)
     {
+        wait(clk.posedge_event());
+        Rdy.write(true);
+        Xin.write(0);
         // Least nibble
         wait(clk.posedge_event());
-        Xin.write(sc_uint<4>(x[t]));
-        wait(clk.posedge_event());
+        Rdy.write(false);
         Xin.write(sc_uint<4>(x[t]));
         // Most nibble
         wait(clk.posedge_event());
+        Rdy.write(false);
         Xin.write(sc_uint<4>(x[t]>>4));
+        // Skip 2-clocks
         wait(clk.posedge_event());
-        Xin.write(sc_uint<4>(x[t]>>4));
-        
+        Rdy.write(false);
+        Xin.write(0);
+        wait(clk.posedge_event());
+        Rdy.write(false);
+        Xin.write(0);
+
         t = ((++t) % F_SAMPLE);
     }
 }
@@ -81,6 +89,8 @@ void sc_fir8_tb::Test_Mon()
     while(true)
     {
         wait(clk.posedge_event());
+        if (Vld.read()==false)  continue;
+        wait(clk.posedge_event());
         yout = (uint16_t)Yout.read();
         wait(clk.posedge_event());
         yout |= ((uint16_t)Yout.read())<<4;
@@ -89,7 +99,7 @@ void sc_fir8_tb::Test_Mon()
         wait(clk.posedge_event());
         yout |= ((uint16_t)Yout.read())<<12;
 
-        //if (yout==0)    continue;
+        if (yout==0)    continue;
 
         if (y[n]!=yout)
             printf("Error:");

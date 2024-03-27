@@ -17,15 +17,13 @@ class alignas(VL_CACHE_LINE_BYTES) Vfir_pe___024root final : public VerilatedMod
 
     // DESIGN SPECIFIC STATE
     CData/*0:0*/ __Vcellinp__fir_pe__clk;
-    CData/*3:0*/ __Vcellout__fir_pe__Yout;
+    CData/*0:0*/ __Vcellinp__fir_pe__Rdy;
     CData/*3:0*/ __Vcellinp__fir_pe__Yin;
-    CData/*3:0*/ __Vcellout__fir_pe__Xout;
     CData/*3:0*/ __Vcellinp__fir_pe__Xin;
     CData/*7:0*/ __Vcellinp__fir_pe__Cin;
+    CData/*4:0*/ fir_pe__DOT__LoadCtl;
     CData/*3:0*/ fir_pe__DOT__XinL;
-    CData/*3:0*/ fir_pe__DOT___XinL;
     CData/*3:0*/ fir_pe__DOT__XinH;
-    CData/*3:0*/ fir_pe__DOT___XinH;
     CData/*3:0*/ fir_pe__DOT__Yin3;
     CData/*3:0*/ fir_pe__DOT__Yin2;
     CData/*3:0*/ fir_pe__DOT__Yin1;
@@ -35,10 +33,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vfir_pe___024root final : public VerilatedMod
     CData/*0:0*/ __Vtrigprevexpr___TOP____Vcellinp__fir_pe__clk__0;
     CData/*0:0*/ __VactContinue;
     SData/*15:0*/ fir_pe__DOT__y;
-    SData/*15:0*/ fir_pe__DOT__y3;
-    SData/*15:0*/ fir_pe__DOT__y2;
-    SData/*15:0*/ fir_pe__DOT__y1;
-    SData/*15:0*/ fir_pe__DOT__y0;
+    SData/*15:0*/ fir_pe__DOT___y;
     IData/*31:0*/ __VactIterCount;
     sc_core::sc_in<bool> clk;
     sc_core::sc_in<uint32_t> Cin;
@@ -46,6 +41,8 @@ class alignas(VL_CACHE_LINE_BYTES) Vfir_pe___024root final : public VerilatedMod
     sc_core::sc_out<uint32_t> Xout;
     sc_core::sc_in<uint32_t> Yin;
     sc_core::sc_out<uint32_t> Yout;
+    sc_core::sc_in<bool> Rdy;
+    sc_core::sc_out<bool> Vld;
     VlTriggerVec<1> __VstlTriggered;
     VlTriggerVec<1> __VicoTriggered;
     VlTriggerVec<1> __VactTriggered;

@@ -18,7 +18,9 @@ SC_MODULE(sc_fir8_tb)
     sc_signal<sc_uint<4> >  Xout;
     sc_signal<sc_uint<4> >  Yin;
     sc_signal<sc_uint<4> >  Yout;
-    
+    sc_signal<bool>         Vld;
+    sc_signal<bool>         Rdy;
+
     sc_fir8*                u_sc_fir8;
 
     // Test utilities
@@ -34,6 +36,8 @@ SC_MODULE(sc_fir8_tb)
 
     SC_CTOR(sc_fir8_tb):
         clk("clk", 100, SC_NS, 0.5, 0.0, SC_NS, false),
+        Vld("Vld"),
+        Rdy("Rdy"),
         Xin("Xin"),
         Xout("Xout"),
         Yin("Yin"),
@@ -52,6 +56,8 @@ SC_MODULE(sc_fir8_tb)
         u_sc_fir8->Xout(Xout);
         u_sc_fir8->Yin(Yin);
         u_sc_fir8->Yout(Yout);
+        u_sc_fir8->Rdy(Rdy);
+        u_sc_fir8->Vld(Vld);
 
 #ifdef VCD_TRACE_FIR8_TB
         // WAVE
@@ -62,6 +68,8 @@ SC_MODULE(sc_fir8_tb)
         sc_trace(fp, Xout, "Xout");
         sc_trace(fp, Yin,  "Yin");
         sc_trace(fp, Yout, "Yout");
+        sc_trace(fp, Rdy,  "Rdy");
+        sc_trace(fp, Vld,  "Vld");
 #endif
     }
     

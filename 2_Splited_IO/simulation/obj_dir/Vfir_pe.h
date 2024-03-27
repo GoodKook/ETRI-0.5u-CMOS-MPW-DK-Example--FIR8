@@ -32,6 +32,8 @@ class alignas(VL_CACHE_LINE_BYTES) Vfir_pe VL_NOT_FINAL : public ::sc_core::sc_m
     sc_core::sc_out<uint32_t> &Xout;
     sc_core::sc_in<uint32_t> &Yin;
     sc_core::sc_out<uint32_t> &Yout;
+    sc_core::sc_in<bool> &Rdy;
+    sc_core::sc_out<bool> &Vld;
 
     // CELLS
     // Public to allow access to /* verilator public */ items.
