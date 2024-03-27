@@ -25,7 +25,7 @@ https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algo
 Pipelined Array:</br>
 ![Ch2_3-2d](https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/assets/162967523/22160900-b4b9-4ba0-8155-bf709eb11cdd)</br>
 </br>
-## 1. Timed SystemC code:</br>
+## Timed SystemC code:</br>
 Processing-Element in SystemC,</br>
 https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_timed/sc_fir_pe.h</br>
 Processing-Element in Verilog,</br>
@@ -40,6 +40,26 @@ RTL Simulation</br>
 ![RTL_Simulation](https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/assets/162967523/3f50254c-bc0c-4543-8500-f4eb474d75bc)</br>
 </br>
 ## 1. Parallel IO & ISSUES:</br>
+Processing-Element in Verilog,</br>
+https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/1_Parallel_IO/source/fir_pe.v</br>
 The Verilog PE meets core-size of 1000x1000um, but pad-limited! ETRI/MyChip MPW restricts to only 28-pins including power.</br>
 </br>
+
+## 2. Splitted IO</br>
+Processing-Element in Verilog,</br>
+https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/2_Splited_IO/source/fir_pe.v</br>
+- 4-bit Xin & out, Yin & out</br>
+- Takes 5-clock interval for each PE</br>
+- Ready & Valid flags on IO</br>
+- Core size: 1004x990um</br>
+- Satisfy Pad numbers</br>
+</br>
+![FIR8_SplittedIO_VCD](https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/assets/162967523/320b0ff5-4d59-4447-b977-9f4ba5a05b4a)</br>
+</br>
+## ISSUES:</br>
+- Longest critical path,</br>
+    y <= XinHL * Cin + Yin3210;</br>
+</br>
+</br>
+
 
