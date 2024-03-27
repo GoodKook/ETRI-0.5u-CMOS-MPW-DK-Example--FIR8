@@ -53,8 +53,7 @@ https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/2_Spli
 - Ready & Valid flags on IO</br>
 - Core size: 1004x990um</br>
 - Satisfy Pad numbers</br>
-</br>
-![FIR8_SplittedIO_VCD](https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/assets/162967523/320b0ff5-4d59-4447-b977-9f4ba5a05b4a)
+![FIR8_SplittedIO_VCD](https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/assets/162967523/320b0ff5-4d59-4447-b977-9f4ba5a05b4a)</br>
 </br>
 ## ISSUES:</br>
 - Longest critical path,</br>
