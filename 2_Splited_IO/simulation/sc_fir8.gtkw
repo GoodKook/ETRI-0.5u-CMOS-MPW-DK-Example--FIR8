@@ -1,0 +1,45 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Wed Mar 27 02:22:06 2024
+[*]
+[dumpfile] "/home/goodkook/ETRI050_DesignKit/devel/Ref_Design/FIR8/2_Splited_IO/simulation/sc_fir8.vcd"
+[dumpfile_mtime] "Wed Mar 27 02:19:04 2024"
+[dumpfile_size] 3083931
+[savefile] "/home/goodkook/ETRI050_DesignKit/devel/Ref_Design/FIR8/2_Splited_IO/simulation/sc_fir8.gtkw"
+[timestart] 0
+[size] 1373 600
+[pos] -1 -1
+*-20.628019 6550000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 214
+[signals_width] 138
+[sst_expanded] 1
+[sst_vpaned_height] 152
+@28
+SystemC.clk
+@200
+-Input
+@22
+SystemC.Xin[3:0]
+SystemC.X_0[3:0]
+SystemC.X_1[3:0]
+SystemC.X_2[3:0]
+SystemC.X_3[3:0]
+SystemC.X_4[3:0]
+SystemC.X_5[3:0]
+SystemC.X_6[3:0]
+SystemC.Xout[3:0]
+@200
+-Output
+@23
+SystemC.Yin[3:0]
+@22
+SystemC.Y_0[3:0]
+SystemC.Y_1[3:0]
+SystemC.Y_2[3:0]
+SystemC.Y_3[3:0]
+SystemC.Y_4[3:0]
+SystemC.Y_5[3:0]
+SystemC.Y_6[3:0]
+SystemC.Yout[3:0]
+[pattern_trace] 1
+[pattern_trace] 0
