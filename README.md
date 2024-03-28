@@ -65,7 +65,7 @@ https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/2_Spli
     y <= XinHL * Cin + Yin3210;</br>
 </br>
 
-## 3. Digit/Bit-Serial Multiply-Adder</br>
+## 3. Optimized Processing Element using Digit/Bit-Serial Multiply-Adder</br>
 Reference: Digit-Serial Processing Element,</br>
 https://www.isy.liu.se/en/edu/kurs/TSTE87/DSP_Integrated_Circuits/pdf/4xDSP_IC_S=Pmult.pdf</br>
 </br>
