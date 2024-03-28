@@ -5,10 +5,11 @@ Reference: Design of FIR Filters</br>
 https://www.robots.ox.ac.uk/~gari/teaching/cdt/A3/readings/Filtering_and_FFT/3F3_5_Design_of_FIR_Filters.pdf</br>
 </br>
 ![FIR_Filter](https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/assets/162967523/ea26339b-93e1-4c4c-919d-98f8b54c4d50)</br>
+https://en.wikipedia.org/wiki/Finite_impulse_response</br>
 </br>
 ## Design & Get Coefficients at T-Filter</br>
 ![T-Filter_FIR8](https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/assets/162967523/e3a033ba-f609-4f49-b8c2-f8497fd27d09)</br>
-https://en.wikipedia.org/wiki/Finite_impulse_response</br>
+http://t-filter.engineerjs.com/</br>
 </br>
 ## Untimed C-Code:</br>
 Filter Tab Coefficients,</br>
