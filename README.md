@@ -1,6 +1,9 @@
 # ETRI-0.5u-CMOS-MPW-DK-Example--FIR8
 
 ## 0. FIR filter algorithm</br>
+Reference: Design of FIR Filters</br>
+https://www.robots.ox.ac.uk/~gari/teaching/cdt/A3/readings/Filtering_and_FFT/3F3_5_Design_of_FIR_Filters.pdf</br>
+</br>
 ![FIR_Filter](https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/assets/162967523/ea26339b-93e1-4c4c-919d-98f8b54c4d50)</br>
 </br>
 ## Design & Get Coefficients at T-Filter</br>
@@ -59,6 +62,11 @@ https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/2_Spli
 - Longest critical path,</br>
     y <= XinHL * Cin + Yin3210;</br>
 </br>
+
+## 3. Digit/Bit-Serial Multiply-Adder</br>
+Reference: Digit-Serial Processing Element,</br>
+https://www.isy.liu.se/en/edu/kurs/TSTE87/DSP_Integrated_Circuits/pdf/4xDSP_IC_S=Pmult.pdf</br>
 </br>
+
 
 
