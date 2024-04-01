@@ -49,7 +49,13 @@ Processing-Element in Verilog,</br>
 https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/1_Parallel_IO/source/fir_pe.v</br>
 The Verilog PE meets core-size of 1000x1000um, but pad-limited! ETRI/MyChip MPW restricts to only 28-pins including power.</br>
 </br>
-
+## Co-Emulation/SystemC code:</br>
+Arduino code,</br>
+fir7_ino,</br>
+https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_emulated/fir8_ino/fir8_ino.ino</br>
+fir,</br>
+https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_emulated/sc_fir8.h</br>
+</br>
 ## 2. Splitted IO</br>
 Processing-Element in Verilog,</br>
 https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/2_Splited_IO/source/fir_pe.v</br>
