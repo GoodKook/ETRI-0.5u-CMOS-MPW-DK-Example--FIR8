@@ -53,7 +53,7 @@ The Verilog PE meets core-size of 1000x1000um, but pad-limited! ETRI/MyChip MPW 
 Arduino code,</br>
 fir7_ino,</br>
 https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_emulated/fir8_ino/fir8_ino.ino</br>
-fir,</br>
+Emulation wrapper,</br>
 https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_emulated/sc_fir8.h</br>
 </br>
 ## 2. Splitted IO</br>
