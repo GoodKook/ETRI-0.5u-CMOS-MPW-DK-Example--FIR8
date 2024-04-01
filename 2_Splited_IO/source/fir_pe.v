@@ -54,8 +54,8 @@ output          Vld;
     always @(posedge clk)
     begin
         if (LoadCtl[4]) begin
-            _y <= XinHL * Cin + Yin3210;
             y  <= _y;
+            _y <= XinHL * Cin + Yin3210;
         end
     end
     // Xout & Yout ---------------------------------------------
