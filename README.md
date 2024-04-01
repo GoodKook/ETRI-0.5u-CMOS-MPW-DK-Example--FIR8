@@ -44,6 +44,15 @@ https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algo
 RTL Simulation</br>
 ![RTL_Simulation](https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/assets/162967523/3f50254c-bc0c-4543-8500-f4eb474d75bc)</br>
 </br>
+## Co-Emulation/SystemC code:</br>
+Arduino code,</br>
+fir7_ino,</br>
+https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_emulated/fir8_ino/fir8_ino.ino</br>
+Emulation wrapper,</br>
+https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/0_algorithm/sc_emulated/sc_fir8.h</br>
+</br>
+![fir8_coEmul](https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/assets/162967523/c300a22c-d729-4a14-930d-62565e4b2859)</br>
+</br>
 ## 1. Parallel IO & ISSUES:</br>
 Processing-Element in Verilog,</br>
 https://github.com/GoodKook/ETRI-0.5u-CMOS-MPW-DK-Example--FIR8/blob/main/1_Parallel_IO/source/fir_pe.v</br>
