@@ -1,5 +1,5 @@
 /**********************************************************************
-Filename: sc_fir_pe.h
+Filename: V_fir_pe.h
 Purpose : Verilated PE of Systolic FIR filter
 Author  : goodkook@gmail.com
 History : Mar. 2024, First release

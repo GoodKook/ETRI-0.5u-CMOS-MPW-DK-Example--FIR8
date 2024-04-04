@@ -1,12 +1,12 @@
 /**********************************************************************
-Filename: sc_fir8.h
-Purpose : Core of 8-Tab Systolic FIR filter
+Filename: E_fir_pe.h
+Purpose : Emulated PE of Systolic FIR filter
 Author  : goodkook@gmail.com
 History : Mar. 2024, First release
 ***********************************************************************/
 
-#ifndef _SC_FIR8_H_
-#define  _SC_FIR8_H_
+#ifndef _E_FIR_PE_H_
+#define _E_FIR_PE_H_
 
 #include <systemc.h>
 
@@ -17,59 +17,61 @@ History : Mar. 2024, First release
 #include <fcntl.h>
 #include <termios.h>
 
-#include "../c_untimed/fir8.h"
-
-SC_MODULE(sc_fir8)
+SC_MODULE(E_fir_pe)
 {
     sc_in<bool>             clk;
+    sc_in<sc_uint<8> >      Cin;
     sc_in<sc_uint<8> >      Xin;
     sc_out<sc_uint<8> >     Xout;
     sc_in<sc_uint<16> >     Yin;
     sc_out<sc_uint<16> >    Yout;
 
-    void fir8_thread(void)
+    sc_signal<uint32_t> _Yout;
+
+#define N_TX    4
+#define N_RX    5
+
+    void pe_thread(void)
     {
-        uint8_t     x;
-        uint8_t     yL, yH;
-        uint16_t    y;
+        uint8_t     x, y, txPacket[N_TX], rxPacket[N_RX];
 
         while(true)
         {
             wait(clk.posedge_event());
-            x = (uint8_t)Xin.read();
-            while(write(fd, &x, 1)<=0)  // Send Byte
-                usleep(100);
+            txPacket[0] = (uint8_t)(Yin.read());    // LSB of Yin
+            txPacket[1] = (uint8_t)(Yin.read()>>8); // MSB of Yin
+            txPacket[2] = (uint8_t)Xin.read();      // Xin
+            txPacket[3] = (uint8_t)Cin.read();      // Cin
 
-            while(read(fd, &yL, 1)<=0)  // Receive Byte
-                usleep(100);
-            while(read(fd, &yH, 1)<=0)  // Receive Byte
-                usleep(100);
+            // Send to Emulator
+            for (int i=0; i<N_TX; i++)
+            {
+                x = txPacket[i];
+                while(write(fd, &x, 1)<=0)  usleep(1);
+            }
+            // Receive from Emulator
+            for (int i=0; i<N_RX; i++)
+            {
+                while(read(fd, &y, 1)<=0)   usleep(1);
+                rxPacket[i] = y;
+            }
 
-            y = (uint16_t)(yH<<8) | (uint16_t)(yL);
-            Yout.write(y);
+           _Yout.write((uint16_t)rxPacket[1]<<8 | (uint16_t)rxPacket[0]);
+            Yout.write((uint16_t)rxPacket[3]<<8 | (uint16_t)rxPacket[2]);
+            Xout.write( (uint8_t)rxPacket[4]);
         }
-        
     }
-
-    sc_signal<sc_uint<8> >  X;    // X-input
-    sc_signal<sc_uint<16> > Y;    // Accumulated
 
     // Arduino Serial IF
     int fd;                 // Serial port file descriptor
     struct termios options; // Serial port setting
-    
-#ifdef  VCD_TRACE_FIR8
-    sc_trace_file* fp;  // VCD file
-#endif
 
-    SC_CTOR(sc_fir8):
+    SC_CTOR(E_fir_pe):
         clk("clk"),
-        Xin("Xin"),
-        Xout("Xout"),
-        Yin("Yin"),
-        Yout("Yout")
+        Cin("Cin"), Xin("Xin"), Xout("Xout"),
+        Yin("Yin"), Yout("Yout"), _Yout("_Yout")
     {
-        SC_THREAD(fir8_thread);
+        SC_THREAD(pe_thread);
         sensitive << clk;
 
         // Arduino DUT
@@ -97,22 +99,10 @@ SC_MODULE(sc_fir8)
         if (rx=='A')
             write(fd, &rx, 1);
         printf("Connection established...\n");
-
-#ifdef VCD_TRACE_FIR8
-        // WAVE
-        fp = sc_create_vcd_trace_file("sc_fir8");
-        fp->set_time_unit(100, SC_PS);  // resolution (trace) ps
-        sc_trace(fp, clk, "clk");
-        sc_trace(fp, Xin,  "Xin");
-        sc_trace(fp, Xout, "Xout");
-        sc_trace(fp, Yin,  "Yin");
-        sc_trace(fp, Yout, "Yout");
-#endif
     }
-
-    ~sc_fir8(void)
+    
+    ~E_fir_pe(void)
     {
-        close(fd);
     }
 };
 

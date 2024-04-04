@@ -18,7 +18,11 @@ SC_MODULE(sc_fir8_tb)
     sc_signal<sc_uint<8> >  Xout;
     sc_signal<sc_uint<16> > Yin;
     sc_signal<sc_uint<16> > Yout;
-    
+#ifdef EMULATED
+    sc_signal<sc_uint<8> >  E_Xout;
+    sc_signal<sc_uint<16> > E_Yout;
+#endif
+
     sc_fir8*                u_sc_fir8;
 
     // Test utilities
@@ -52,6 +56,10 @@ SC_MODULE(sc_fir8_tb)
         u_sc_fir8->Xout(Xout);
         u_sc_fir8->Yin(Yin);
         u_sc_fir8->Yout(Yout);
+#ifdef EMULATED
+        u_sc_fir8->E_Xout(E_Xout);
+        u_sc_fir8->E_Yout(E_Yout);
+#endif
 
 #ifdef VCD_TRACE_FIR8_TB
         // WAVE

@@ -66,6 +66,9 @@ void sc_fir8_tb::Test_Mon()
 {
     int         n = 0;
     uint16_t    yout;
+#ifdef EMULATED
+    uint16_t    e_yout;
+#endif
 
     FILE *fp = fopen ( "sc_fir8_tb_out.txt", "w" );
 
@@ -73,12 +76,17 @@ void sc_fir8_tb::Test_Mon()
     {
         wait(clk.posedge_event());
         yout = (uint16_t)Yout.read();
-
+#ifdef EMULATED
+        e_yout = (uint16_t)E_Yout.read();
+#endif
         if (yout==0)    continue;
-
 
         if (y[n]!=yout)
             printf("Error:");
+#ifdef EMULATED
+        if (y[n]!=e_yout)
+            printf("E_Err:");
+#endif
         printf("[%4d] y=%d / Yout=%d\n", n, (uint16_t)y[n], yout);
         fprintf(fp, "%5d %5d\n", (uint16_t)x[n], (uint16_t)yout);   //y[i]);
 

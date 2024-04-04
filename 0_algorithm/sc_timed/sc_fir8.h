@@ -13,6 +13,9 @@ History : Mar. 2024, First release
 #ifdef VERILATED
 #include "V_fir_pe.h"
 #endif
+#ifdef EMULATED
+#include "E_fir_pe.h"
+#endif
 #ifdef MTI_SIM
 #include "fir_pe.h"
 #endif
@@ -31,6 +34,10 @@ SC_MODULE(sc_fir8)
     sc_out<sc_uint<8> >     Xout;
     sc_in<sc_uint<16> >     Yin;
     sc_out<sc_uint<16> >    Yout;
+#ifdef EMULATED
+    sc_out<sc_uint<8> >     E_Xout;
+    sc_out<sc_uint<16> >    E_Yout;
+#endif
 
 //    void fir8_thread(void)
 //    {
@@ -38,6 +45,11 @@ SC_MODULE(sc_fir8)
 
 #ifdef VERILATED
     V_fir_pe*       u_fir_pe[N_PE_ARRAY];
+#endif
+#ifdef EMULATED
+    E_fir_pe*               u_E_fir_pe;
+//    sc_signal<sc_uint<8> >  E_Xout;
+//    sc_signal<sc_uint<16> > E_Yout;
 #endif
 #ifdef MTI_SIM
     fir_pe*         u_fir_pe[N_PE_ARRAY];
@@ -64,7 +76,7 @@ SC_MODULE(sc_fir8)
 //        SC_THREAD(fir8_thread);
 //        sensitive << clk;
         
-        // Instaltiate PE array
+        // Instaltiate PE array -----------------------------
         char    szPeName[16];
         for (int i=0; i<N_PE_ARRAY; i++)
         {
@@ -82,6 +94,12 @@ SC_MODULE(sc_fir8)
             u_fir_pe[i]->Cin(C[i]);
             u_fir_pe[i]->clk(clk);
         }
+#ifdef EMULATED
+        u_E_fir_pe = new E_fir_pe("u_PE_Emulated");
+        u_E_fir_pe->Cin(C[N_PE_ARRAY-1]);
+        u_E_fir_pe->clk(clk);
+#endif
+        // Configure Array -----------------------------------
         // 0-th PE
         u_fir_pe[0]->Xin(Xin);
         u_fir_pe[0]->Xout(X[0]);
@@ -96,6 +114,12 @@ SC_MODULE(sc_fir8)
             u_fir_pe[i]->Yout(Y[i]);
         }
         // Last PE
+#ifdef EMULATED
+        u_E_fir_pe->Xin(X[N_PE_ARRAY-2]);
+        u_E_fir_pe->Xout(E_Xout);
+        u_E_fir_pe->Yin(Y[N_PE_ARRAY-2]);
+        u_E_fir_pe->Yout(E_Yout);
+#endif
         u_fir_pe[N_PE_ARRAY-1]->Xin(X[N_PE_ARRAY-2]);
         u_fir_pe[N_PE_ARRAY-1]->Xout(Xout);
         u_fir_pe[N_PE_ARRAY-1]->Yin(Y[N_PE_ARRAY-2]);
@@ -110,6 +134,10 @@ SC_MODULE(sc_fir8)
         sc_trace(fp, Xout, "Xout");
         sc_trace(fp, Yin,  "Yin");
         sc_trace(fp, Yout, "Yout");
+#ifdef EMULATED
+        sc_trace(fp, E_Xout, "E_Xout");
+        sc_trace(fp, E_Yout, "E_Yout");
+#endif
         char szTrace[8];
         for (int i=0; i<N_PE_ARRAY-1; i++)
         {
