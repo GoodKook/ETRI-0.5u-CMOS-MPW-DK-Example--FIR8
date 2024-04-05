@@ -137,6 +137,7 @@ SC_MODULE(sc_fir8)
 #ifdef EMULATED
         sc_trace(fp, E_Xout, "E_Xout");
         sc_trace(fp, E_Yout, "E_Yout");
+        sc_trace(fp, u_E_fir_pe->_Yout, "E__Yout");
 #endif
         char szTrace[8];
         for (int i=0; i<N_PE_ARRAY-1; i++)
