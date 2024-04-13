@@ -38,8 +38,8 @@ SC_MODULE(V_fir_pe)
         _Yin = (uint32_t)Yin.read();
         _Rdy = Rdy.read();
 
-        Xout.write(sc_uint<8>(_Xout));
-        Yout.write(sc_uint<16>(_Yout));
+        Xout.write(sc_uint<4>(_Xout));
+        Yout.write(sc_uint<4>(_Yout));
         Vld.write(_Vld);
     }
 
