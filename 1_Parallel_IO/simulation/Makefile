@@ -13,9 +13,11 @@ SC_SRCS      =  ../../0_algorithm/sc_timed/sc_main.cpp \
 				../../0_algorithm/c_untimed/fir8.cpp \
 				../../0_algorithm/c_untimed/cnoise.cpp
 SC_HDRS      =  ../../0_algorithm/sc_timed/sc_fir8.h \
-				../../0_algorithm/sc_timed/sc_fir8_tb.h \
-				./V_fir_pe.h
-SC_INC		= -I. -I../../0_algorithm/c_untimed -I../../0_algorithm/sc_timed
+				../../0_algorithm/sc_timed/sc_fir8_tb.h
+verilated : SC_HDRS += V_fir_pe.h
+emulated  : SC_HDRS += E_fir_pe.h
+SC_INC		= 	-I. -I../../0_algorithm/c_untimed \
+				-I../../0_algorithm/sc_timed
 
 # Verilator vars -----------------------------------------------
 VERILOG_SRCS =  ../source/fir_pe.v
@@ -29,8 +31,8 @@ VCFLAGS		+= -CFLAGS -g
 VCFLAGS		+= -CFLAGS -I../../simulation
 VCFLAGS		+= -CFLAGS -DVCD_TRACE_FIR8
 #VCFLAGS		+= -CFLAGS -DVCD_TRACE_FIR8_TB
-VCFLAGS		+= -CFLAGS -DVERILATED
-VCFLAGS		+= -CFLAGS -DEMULATED
+verilated : VCFLAGS	+= -CFLAGS -DVERILATED
+emulated  : VCFLAGS	+= -CFLAGS -DEMULATED
 VCFLAGS		+= -LDFLAGS -lm
 VCFLAGS		+= -LDFLAGS -lgsl
 
@@ -41,7 +43,34 @@ TARGET       = V$(TOP_MODULE)
 TARGET_DIR   = obj_dir
 
 # Build Rules --------------------------------------------------
-all : $(TARGET_DIR)/$(TARGET)
+all : 
+	@echo 'Makefile for Co-Simulation/Emulation of "FIR8":8-bit Parallel IO'
+	@echo 'Usage:'
+	@echo '    Building'
+	@echo '        make verilated'
+	@echo '               for Co-Simulation: PE in Verilog RTL with SystemC TB'
+	@echo '        make emulated'
+	@echo '               for Co-Emulation: Untimed PE in Arduino Board* with SystemC TB'
+	@echo '                   * Must be configured before running'
+	@echo '                     where untimed C model of the PE moved to Arduino board'
+	@echo '        NOTE: Re-used SystemC testbench at "0_algorithm/sc_timed/sc_fir8.h"'
+	@echo ''
+	@echo '    Running simulation,'
+	@echo '        make run'
+	@echo ''
+	@echo '    Following options for Co-Simulation under Questa* environment'
+	@echo '        make mti_fun_build'
+	@echo '        make mti_fun_run'
+	@echo '        make mti_net_build'
+	@echo '        make mti_net_run'
+	@echo ''
+	@echo '    Clean up working folder,'
+	@echo '        make clean'
+	@echo '        make clean_all'
+
+verilated : $(TARGET_DIR)/$(TARGET)
+
+emulated  : $(TARGET_DIR)/$(TARGET)
 
 $(TARGET_DIR)/$(TARGET) : $(VERILOG_SRCS) $(SC_SRCS) $(SC_HDRS)
 	$(VERILATOR) --sc -Wall --top-module $(TOP_MODULE) $(VERILOG_DEF) --exe --build \

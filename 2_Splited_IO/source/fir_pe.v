@@ -6,7 +6,7 @@
 /* verilator lint_off UNUSEDSIGNAL */
 /* verilator lint_off UNDRIVEN */
 
-module fir_pe (clk, Cin, Xin, Xout, Yin, Yout, Rdy, Vld);
+module fir_pe (clk, Cin, Xin, Xout, Yin, Yout, Rdy, Vld, Vld_LED);
 input           clk;
 input   [7:0]   Cin;
 input   [3:0]   Xin;
@@ -15,6 +15,7 @@ input   [3:0]   Yin;
 output  [3:0]   Yout;
 input           Rdy;
 output          Vld;
+output          Vld_LED;
 
     // Load Control --------------------------------------------
     integer i;
@@ -31,6 +32,8 @@ output          Vld;
             LoadCtl[i+1] <= LoadCtl[i];
     end
     assign Vld = LoadCtl[4];
+    assign Vld_LED = LoadCtl[4];
+    
     // Xin -----------------------------------------------------
     reg     [3:0]   XinL, XinH;
     always @(posedge clk)

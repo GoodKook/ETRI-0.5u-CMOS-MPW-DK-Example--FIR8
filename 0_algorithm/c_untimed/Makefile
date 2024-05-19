@@ -10,7 +10,21 @@ EXEC = fir8_tb
 INC_PATH = -I. -I/opt/local/include
 LIBS = -lm -lgsl
 
-all: $(EXEC)
+all:
+	@echo 'Makefile for un-timed C/C++ test of "FIR8" example'
+	@echo '  * GNU Science Library(GSL) is used for noise generation'
+	@echo 'Usage:'
+	@echo '    make [option]'
+	@echo '         Use one of following options'
+	@echo '             build'
+	@echo '             run'
+	@echo '             plot_x'
+	@echo '             plot_fx'
+	@echo '             plot_y'
+	@echo '             plot_fy'
+	@echo '             clean'
+
+build: $(EXEC)
 
 $(EXEC): $(SRCS) $(HDRS)
 	gcc $(INC_PATH) $(LIBS) -o $(EXEC) $(SRCS) $(LIBS)

@@ -1,0 +1,40 @@
+Emulator Pin Mapping:
+   Arduino DUE & Arty A7-100 & Verilog RTL
+--------------- ----------  -----------
+SAM3X8E/Digital Pmod /FPGA  ALU_wrapper
+--------------- ----------  -----------
+   PB26/22      JD-4 /F3    -
+   PA14/23      JD-10/G2    -
+   PA15/24      JD-3 /F4    -
+   PD0 /25      JD-9 /H2    -
+   PD1 /26      JD-2 /D3    -
+   PD2 /27      JD-8 /D2    Vld
+   PD3 /28      JD-1 /D4    Rdy
+   PD6 /29      JD-7 /E2    clk
+
+   PD9 /30      JC-4 /V11   Cin[7]
+   PA7 /31      JC-10/U13   Cin[6]
+   PD10/32      JC-3 /V10   Cin[5]
+   PC1 /33      JC-9 /T13   Cin[4]
+   PC2 /34      JC-2 /V12   Cin[3]
+   PC3 /35      JC-8 /V14   Cin[2]
+   PC4 /36      JC-1 /U12   Cin[1]
+   PC5 /37      JC-7 /U14   Cin[0]
+
+   PC6 /38      JB-4 /C15   Yout[3]
+   PC7 /39      JB-10/J15   Yout[2]
+   PC8 /40      JB-3 /D15   Yout[1]
+   PC9 /41      JB-9 /K15   Yout[0]
+   PA19/42      JB-2 /E16   Yin[3]
+   PA20/43      JB-8 /J18   Yin[2]
+   PC19/44      JB-1 /E15   Yin[1]
+   PC18/45      JB-7 /J17   Yin[0]
+
+   PC17/46      JA-4 /D12   Xout[3]
+   PC16/47      JA-10/K16   Xout[2]
+   PC15/48      JA-3 /A11   Xout[1]
+   PC14/49      JA-9 /A18   Xout[0]
+   PC13/50      JA-2 /B11   Xin[3]
+   PC12/51      JA-8 /B18   Xin[2]
+   PB21/52      JA-1 /G13   Xin[1]
+   PB14/53      JA-7 /D13   Xin[0]

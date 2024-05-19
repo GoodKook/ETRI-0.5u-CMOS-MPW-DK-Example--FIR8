@@ -8,19 +8,32 @@ export CXX				= clang++
 export CXXFLAGS			= -std=c++17
 
 
-SC_TOP  = sc_fir8_tb
-SC_SRCS = sc_main.cpp $(SC_TOP).cpp ../c_untimed/fir8.cpp ../c_untimed/cnoise.cpp
-SC_HDRS = sc_fir8.h $(SC_TOP).h
+SC_TOP  = 	sc_fir8_tb
+SC_SRCS = 	sc_main.cpp $(SC_TOP).cpp \
+			../c_untimed/fir8.cpp \
+			../c_untimed/cnoise.cpp
+SC_HDRS = 	sc_fir8.h $(SC_TOP).h
+
 CFLAGS  = -std=c++17 -g
 CFLAGS += -DVCD_TRACE_FIR8
 CFLAGS += -DVCD_TRACE_FIR8_TB
-CFLAGS += -I/usr/include/python3.8
 LIBS    = -lsystemc
 LIBS   += -lm
 LIBS   += -lgsl
-LIBS   += -lpython3.8
 
-all: $(SC_TOP)
+all: 
+	@echo 'Makefile for Arduino emulation with timed SystemC TB/C++ of "FIR8" example'
+	@echo '  Un-timed fir8() is moved to Arduino board* and worked with timed SystemC TB.'
+	@echo '  Timed SC TB interact through USB-Serial port. Solw but real co-emulation!'
+	@echo '    * Arduino board must be configure before running.'
+	@echo 'Usage:'
+	@echo '    make [option]'
+	@echo '         Use one of following options'
+	@echo '             build'
+	@echo '             run'
+	@echo '             clean'
+
+build: $(SC_TOP)
 
 $(SC_TOP): $(SC_SRCS) $(SC_HDRS)
 	clang++ -I. -I../c_untimed -I$(SYSTEMC_INCLUDE) $(CFLAGS) -L$(SYSTEMC_LIBDIR) \

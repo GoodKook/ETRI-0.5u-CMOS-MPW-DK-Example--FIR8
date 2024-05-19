@@ -84,11 +84,22 @@ void setup()
 uint8_t   x;
 uint16_t  y;
 
+bool bLED = false;
+
 void loop()
 {
   if (Serial.available() > 0)
   {
-    digitalWrite(LED_BUILTIN, LOW);
+    if (bLED)
+    {
+      digitalWrite(LED_BUILTIN, HIGH);
+      bLED = false;
+    }
+    else
+    {
+      digitalWrite(LED_BUILTIN, LOW);
+      bLED = true;
+    }
 
     incomingByte = Serial.read();
     x = (uint8_t)incomingByte;
@@ -104,8 +115,6 @@ void loop()
     Serial.write(outingByte); // LSB of y
     outingByte = (int)((y>>8) & 0x00FF);
     Serial.write(outingByte); // MSB of y
-
-    digitalWrite(LED_BUILTIN, HIGH);
   }
 }
 
