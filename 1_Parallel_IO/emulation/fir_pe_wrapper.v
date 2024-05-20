@@ -22,6 +22,7 @@ module fir_pe_wrapper(Data_In, Data_Out, Addr, load_emu, get_emu, clk_emu, clk_d
     reg [ 7:0]  Xout;
     reg [15:0]  Yout;
 
+    // Emulation Transactor
     always @(posedge clk_emu)
     begin
         if (load_emu)   // Input stimulus to DUT
@@ -37,14 +38,21 @@ module fir_pe_wrapper(Data_In, Data_Out, Addr, load_emu, get_emu, clk_emu, clk_d
             vectOut[1] <= Yout[15:8];
             vectOut[2] <= Yout[7:0];
         end
-        else begin
+        else
+        begin
             stimIn[Addr] <= Data_In;
             Data_Out <= vectOut[Addr];
         end
     end
 
+    // This is for blinking LED
+    reg [3:0] counter;
+    always @(posedge clk_dut)
+    begin
+        counter <= counter + 1;
+    end
     // Read-back DUT output
-    assign clk_LED = clk_dut;   // Monitor emulation process
+    assign clk_LED = counter[3];   // Monitor emulation process
     
     // DUT
     fir_pe u_fir_pe(

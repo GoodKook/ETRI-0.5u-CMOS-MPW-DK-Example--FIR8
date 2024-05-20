@@ -20,6 +20,11 @@ SC_MODULE(sc_fir8_tb)
     sc_signal<sc_uint<4> >  Yout;
     sc_signal<bool>         Vld;
     sc_signal<bool>         Rdy;
+#ifdef EMULATED
+    sc_signal<sc_uint<4> >     E_Xout;
+    sc_signal<sc_uint<4> >     E_Yout;
+    sc_signal<bool>            E_Vld;
+#endif
 
     sc_fir8*                u_sc_fir8;
 
@@ -58,6 +63,11 @@ SC_MODULE(sc_fir8_tb)
         u_sc_fir8->Yout(Yout);
         u_sc_fir8->Rdy(Rdy);
         u_sc_fir8->Vld(Vld);
+#ifdef EMULATED
+        u_sc_fir8->E_Xout(E_Xout);
+        u_sc_fir8->E_Yout(E_Yout);
+        u_sc_fir8->E_Vld(E_Vld);
+#endif
 
 #ifdef VCD_TRACE_FIR8_TB
         // WAVE

@@ -13,11 +13,14 @@ History : Mar. 2024, First release
 #ifdef VERILATED
 #include "V_fir_pe.h"
 #endif
+#ifdef EMULATED
+#include "E_fir_pe.h"
+#endif
 #ifdef MTI_SIM
 #include "fir_pe.h"
 #endif
-#if !defined(VERILATED) && !defined(MTI_SIM)
-#include "sc_fir_pe.h"
+#if !defined(VERILATED) && !defined(EMULATED) && !defined(MTI_SIM)
+#error Specify PE model: VERILATED or EMULATED or MTI_SIM
 #endif
 
 #include "fir8.h"   // Filter Tab. Coeff
@@ -33,19 +36,20 @@ SC_MODULE(sc_fir8)
     sc_out<sc_uint<4> >     Xout;
     sc_in<sc_uint<4> >      Yin;
     sc_out<sc_uint<4> >     Yout;
-
-//    void fir8_thread(void)
-//    {
-//    }
+#ifdef EMULATED
+    sc_out<sc_uint<4> >     E_Xout;
+    sc_out<sc_uint<4> >     E_Yout;
+    sc_out<bool>            E_Vld;
+#endif
 
 #ifdef VERILATED
     V_fir_pe*       u_fir_pe[N_PE_ARRAY];
 #endif
+#ifdef EMULATED
+    E_fir_pe*       u_E_fir_pe;
+#endif
 #ifdef MTI_SIM
     fir_pe*         u_fir_pe[N_PE_ARRAY];
-#endif
-#if !defined(VERILATED) && !defined(MTI_SIM)
-    sc_fir_pe*      u_fir_pe[N_PE_ARRAY];
 #endif
 
     sc_signal<sc_uint<4> >  X[N_PE_ARRAY-1];    // X-input
@@ -64,9 +68,6 @@ SC_MODULE(sc_fir8)
         Yin("Yin"),
         Yout("Yout")
     {
-//        SC_THREAD(fir8_thread);
-//        sensitive << clk;
-        
         // Instaltiate PE array
         char    szPeName[16];
         for (int i=0; i<N_PE_ARRAY; i++)
@@ -78,8 +79,8 @@ SC_MODULE(sc_fir8)
 #ifdef MTI_SIM
             u_fir_pe[i] = new fir_pe(szPeName);
 #endif
-#if !defined(VERILATED) && !defined(MTI_SIM)
-            u_fir_pe[i] = new sc_fir_pe(szPeName);
+#if !defined(VERILATED) && !defined(EMULATED) && !defined(MTI_SIM)
+#error fir_pe NOT defined
 #endif
             C[i].write(sc_uint<8>(filter_taps[i]));
             u_fir_pe[i]->Cin(C[i]);
@@ -109,6 +110,20 @@ SC_MODULE(sc_fir8)
         u_fir_pe[N_PE_ARRAY-1]->Yout(Yout);
         u_fir_pe[N_PE_ARRAY-1]->Rdy(Valid[N_PE_ARRAY-2]);
         u_fir_pe[N_PE_ARRAY-1]->Vld(Vld);
+#ifdef EMULATED
+        // Emulated PE
+        u_E_fir_pe = new E_fir_pe("u_Emul_PE");
+        C[N_PE_ARRAY-1].write(sc_uint<8>(filter_taps[N_PE_ARRAY-1]));
+        u_E_fir_pe->Cin(C[N_PE_ARRAY-1]);
+        u_E_fir_pe->clk(clk);
+
+        u_E_fir_pe->Xin(X[N_PE_ARRAY-2]);
+        u_E_fir_pe->Xout(E_Xout);
+        u_E_fir_pe->Yin(Y[N_PE_ARRAY-2]);
+        u_E_fir_pe->Yout(E_Yout);
+        u_E_fir_pe->Rdy(Valid[N_PE_ARRAY-2]);
+        u_E_fir_pe->Vld(E_Vld);
+#endif
 
 #ifdef VCD_TRACE_FIR8
         // WAVE
@@ -121,6 +136,11 @@ SC_MODULE(sc_fir8)
         sc_trace(fp, Yout, "Yout");
         sc_trace(fp, Rdy,  "Rdy");
         sc_trace(fp, Vld,  "Vld");
+#ifdef EMULATED
+        sc_trace(fp, E_Xout, "E_Xout");
+        sc_trace(fp, E_Yout, "E_Yout");
+        sc_trace(fp, E_Vld,  "E_Vld");
+#endif
         char szTrace[16];
         for (int i=0; i<N_PE_ARRAY-1; i++)
         {

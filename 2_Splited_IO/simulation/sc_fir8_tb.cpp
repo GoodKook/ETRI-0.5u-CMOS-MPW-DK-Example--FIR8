@@ -82,7 +82,7 @@ void sc_fir8_tb::Test_Gen()
 void sc_fir8_tb::Test_Mon()
 {
     int         n = 0;
-    uint16_t    yout;
+    uint16_t    yout, E_yout;
 
     FILE *fp = fopen ( "sc_fir8_tb_out.txt", "w" );
 
@@ -90,21 +90,44 @@ void sc_fir8_tb::Test_Mon()
     {
         wait(clk.posedge_event());
         if (Vld.read()==false)  continue;
+        // Yout[3:0] --------------------------------
         wait(clk.posedge_event());
         yout = (uint16_t)Yout.read();
+#ifdef EMULATED
+        E_yout = (uint16_t)E_Yout.read();
+#endif
+        // Yout[7:4] --------------------------------
         wait(clk.posedge_event());
         yout |= ((uint16_t)Yout.read())<<4;
+#ifdef EMULATED
+        E_yout |= ((uint16_t)E_Yout.read())<<4;
+#endif
+        // Yout[12:8] --------------------------------
         wait(clk.posedge_event());
         yout |= ((uint16_t)Yout.read())<<8;
+#ifdef EMULATED
+        E_yout |= ((uint16_t)E_Yout.read())<<8;
+#endif
+        // Yout[15:13] --------------------------------
         wait(clk.posedge_event());
         yout |= ((uint16_t)Yout.read())<<12;
+#ifdef EMULATED
+        E_yout |= ((uint16_t)E_Yout.read())<<12;
+#endif
 
         if (yout==0)    continue;
 
+#ifdef EMULATED
+        if (y[n]!=E_yout)
+            printf("Error:");
+        printf("[%4d] y=%d / Yout=%d / E_Yout=%d\n", n, (uint16_t)y[n], yout, E_yout);
+#else
         if (y[n]!=yout)
             printf("Error:");
         printf("[%4d] y=%d / Yout=%d\n", n, (uint16_t)y[n], yout);
-        fprintf(fp, "%5d %5d\n", (uint16_t)x[n], (uint16_t)yout);   //y[i]);
+#endif        
+        fprintf(fp, "%5d %5d\n", (uint16_t)x[n], (uint16_t)yout);
+
 
         n++;
         if (n==F_SAMPLE)

@@ -1,7 +1,7 @@
-Qflow migration logfile created on Tue Mar 26 16:29:29 KST 2024
+Qflow migration logfile created on Sun May 19 22:47:59 KST 2024
 magic -dnull -noconsole  migrate_fir_pe.tcl
 
-Magic 8.3 revision 462 - Compiled on Wed Feb 28 06:26:48 KST 2024.
+Magic 8.3 revision 478 - Compiled on Sun May  5 22:15:24 KST 2024.
 Starting magic under Tcl interpreter
 Using the terminal as the console.
 Using NULL graphics device.
@@ -60,4 +60,4 @@ Extracting INVX2 into INVX2.ext:
 Extracting CLKBUF1 into CLKBUF1.ext:
 Extracting fir_pe into fir_pe.ext:
 exttospice finished.
-Migration script ended on Tue Mar 26 16:29:31 KST 2024
+Migration script ended on Sun May 19 22:48:00 KST 2024

@@ -1,6 +1,6 @@
 #!/bin/tcsh -f
 #------------------------------------------------------------
-# project variables for project ~/ETRI050_DesignKit/devel/Ref_Design/FIR8/1_Parallel_IO
+# project variables for project ~/ETRI050_DesignKit/Ref_Design/FIR8/1_Parallel_IO
 #------------------------------------------------------------
 
 # Flow options:
@@ -41,7 +41,7 @@ set addspacers_options = "-stripe 8 225 PG"
 
 # Router command options:
 # -------------------------------------------
-# set route_show =
+set route_show = 1
 # set route_layers =
 # set via_use =
 set via_stacks = none

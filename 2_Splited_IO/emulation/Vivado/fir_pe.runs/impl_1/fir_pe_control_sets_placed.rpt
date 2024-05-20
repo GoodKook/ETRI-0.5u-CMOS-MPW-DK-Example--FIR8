@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2.2 (lin64) Build 4126759 Thu Feb  8 23:52:05 MST 2024
-| Date         : Wed May 15 00:10:05 2024
+| Date         : Mon May 20 14:32:32 2024
 | Host         : GoodKook-Skull running 64-bit Ubuntu 20.04.6 LTS
 | Command      : report_control_sets -verbose -file fir_pe_control_sets_placed.rpt
 | Design       : fir_pe
@@ -73,8 +73,8 @@ Table of Contents
 +--------------+---------------+------------------+------------------+----------------+--------------+
 | Clock Signal | Enable Signal | Set/Reset Signal | Slice Load Count | Bel Load Count | Bels / Slice |
 +--------------+---------------+------------------+------------------+----------------+--------------+
-|  _025_       | _009_         |                  |                1 |              4 |         4.00 |
 |  _025_       | _010_         |                  |                1 |              4 |         4.00 |
+|  _025_       | _009_         |                  |                1 |              4 |         4.00 |
 |  _025_       |               |                  |                6 |              7 |         1.17 |
 |  _025_       | LoadCtl[0]    |                  |                4 |              8 |         2.00 |
 |  _025_       | _008_         |                  |                3 |              8 |         2.67 |

@@ -11,7 +11,7 @@ set VDD vdd
 drc euclidean on
 drc off
 
-addpath ../../../../digital_ETRI
+addpath ~/ETRI050_DesignKit/digital_ETRI
 
 macro Control_XK_Pointer_Button4 {zoom 0.5}
 macro Control_XK_Pointer_Button5 {zoom 2}

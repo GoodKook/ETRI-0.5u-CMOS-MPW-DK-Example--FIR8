@@ -35,7 +35,28 @@ TARGET       = V$(TOP_MODULE)
 TARGET_DIR   = obj_dir
 
 # Build Rules --------------------------------------------------
-all : $(TARGET_DIR)/$(TARGET)
+all :
+	@echo 'Makefile for Co-Simulation of "FIR8": Splitted IO'
+	@echo 'Usage:'
+	@echo '    Building'
+	@echo '        make verilated'
+	@echo '               for Co-Simulation: PE in Verilog RTL with SystemC TB*'
+	@echo '                   * Used SystemC testbench at "./sc_fir8.h"'
+	@echo ''
+	@echo '    Running simulation,'
+	@echo '        make run'
+	@echo ''
+	@echo '    Following options for Co-Simulation under Questa* environment'
+	@echo '        make mti_fun_build'
+	@echo '        make mti_fun_run'
+	@echo '        make mti_net_build'
+	@echo '        make mti_net_run'
+	@echo ''
+	@echo '    Clean up working folder,'
+	@echo '        make clean'
+	@echo '        make clean_all'
+
+verilated : $(TARGET_DIR)/$(TARGET)
 
 $(TARGET_DIR)/$(TARGET) : $(VERILOG_SRCS) $(SC_SRCS) $(SC_HDRS)
 	$(VERILATOR) --sc -Wall --top-module $(TOP_MODULE) $(VERILOG_DEF) --exe --build \
@@ -52,7 +73,6 @@ run : $(TARGET_DIR)/$(TARGET)
 
 clean :
 	rm -rf $(TARGET_DIR)
-	rm -f *.txt
 	rm -f *.vcd
 
 clean_all :

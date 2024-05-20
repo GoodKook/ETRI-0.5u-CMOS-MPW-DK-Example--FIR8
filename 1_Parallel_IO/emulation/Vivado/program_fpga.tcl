@@ -8,5 +8,6 @@ open_hw_target
 set_property PROGRAM.FILE {./fir_pe_wrapper.runs/impl_1/fir_pe_wrapper.bit} [get_hw_devices xc7a100t_0]
 current_hw_device [get_hw_devices xc7a100t_0]
 set_property PROGRAM.FILE {./fir_pe_wrapper.runs/impl_1/fir_pe_wrapper.bit} [get_hw_devices xc7a100t_0]
+
 program_hw_devices [get_hw_devices xc7a100t_0]
 

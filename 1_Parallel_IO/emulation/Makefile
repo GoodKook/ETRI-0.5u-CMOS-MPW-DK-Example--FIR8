@@ -45,6 +45,7 @@ build  : $(TOP_MODULE)
 $(TOP_MODULE) : $(SC_SRCS) $(SC_TOP_H)
 	$(CXX) $(CXXFLAGS) \
 		-DEMULATED \
+		-DVCD_TRACE_FIR8 \
 		-I. -I../simulation -I$(SYSTEMC_INCLUDE) \
 		-L$(SYSTEMC_LIBDIR) -Wl,-rpath=$(SYSTEMC_LIBDIR) \
 		-lsystemc -lm -lgsl \
