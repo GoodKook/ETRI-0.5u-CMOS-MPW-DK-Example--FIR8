@@ -12,7 +12,7 @@ void fir_pe (uint16_t Yin, uint16_t *Yout, uint8_t Xin, uint8_t *Xout, uint8_t C
 {
   // Shift out for Pipeline processing
   *Xout = Xin;
-  *Yout = _Yout;
+  *Yout = _Yout;  // Delayed by 1 clock !
 
   // Process PE
   _Yout = (Xin * Cin) + Yin;
@@ -31,8 +31,8 @@ void establishContact()
 
 void setup()
 {
-  // start serial port at 9600 bps:
-  Serial.begin(9600);
+  // start serial port at 115200 bps:
+  Serial.begin(115200);
   while (!Serial)
   {
     ;  // wait for serial port to connect. Needed for native USB port only
@@ -44,7 +44,7 @@ void setup()
 }
 
 #define N_RX  4 // Yin, Xin, Cin
-#define N_TX  5 // _Yout, Yout, Xout
+#define N_TX  3 // Yout, Xout
 
 uint8_t rxBuf[N_RX], txBuf[N_TX];
 
@@ -84,24 +84,25 @@ void TxPacket()
   }
 }
 
+uint8_t counter;
+
 void loop()
 {
-  digitalWrite(LED_BUILTIN, LOW);
+  counter = counter + 1;
+  digitalWrite(LED_BUILTIN, counter & 0x10);
+
   RxPacket();
 
-  Yin = (uint16_t)(rxBuf[1])<<8 | (uint16_t)(rxBuf[0]);
-  Xin = (uint8_t)(rxBuf[2]);
-  Cin = (uint8_t)(rxBuf[3]);
+  Yin = (uint16_t)(rxBuf[2])<<8 | (uint16_t)(rxBuf[3]);
+  Xin = (uint8_t)(rxBuf[1]);
+  Cin = (uint8_t)(rxBuf[0]);
 
   // Call PE
   fir_pe(Yin, &Yout, Xin, &Xout, Cin);
 
-  txBuf[0] = (uint8_t)(_Yout);
-  txBuf[1] = (uint8_t)(_Yout>>8);
   txBuf[2] = (uint8_t)(Yout);
-  txBuf[3] = (uint8_t)(Yout>>8);
-  txBuf[4] = (uint8_t)(Xout);
+  txBuf[1] = (uint8_t)(Yout>>8);
+  txBuf[0] = (uint8_t)(Xout);
 
-  digitalWrite(LED_BUILTIN, HIGH);
   TxPacket();
 }

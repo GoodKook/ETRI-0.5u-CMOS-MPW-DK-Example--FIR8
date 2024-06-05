@@ -1,28 +1,44 @@
 //
-// Co-Emulation warapper for parallel IO
+// Poorman's Standard-Emulator by GoodKook, goodkook@gmail.com
+//  Co-Emulation warapper for the "fir_pe"
 //
 
-module fir_pe_wrapper(Data_In, Data_Out, Addr, load_emu, get_emu, clk_emu, clk_dut, clk_LED);
-    input  [7:0] Data_In;
-    output [7:0] Data_Out;
-    input  [7:0] Addr;
-    input  load_emu, get_emu, clk_emu;
-    input  clk_dut;
+`ifdef EMU_MONITOR
+module fir_pe_wrapper(Din_emu, Dout_emu, Addr_emu, load_emu, get_emu, clk_emu, clk_dut, clk_LED);
+`else
+module fir_pe_wrapper(Din_emu, Dout_emu, Addr_emu, load_emu, get_emu, clk_emu, clk_dut);
+`endif
+    input  [7:0]    Din_emu;
+    output [7:0]    Dout_emu;
+    input  [2:0]    Addr_emu;
+    input           load_emu, get_emu, clk_emu;
+    input           clk_dut;
+`ifdef EMU_MONITOR
     output clk_LED;
-
-    reg [7:0] Data_Out;
-
-    // Stimulus & Output capture for DUT
-    reg [7:0] stimIn[4];
-    reg [7:0] vectOut[3];
-    // DUT interface
+    // Monitoring emulation process by blinking LED
+    reg [3:0] counter;
+    always @(posedge clk_dut)
+    begin
+        counter <= counter + 1;
+    end
+    assign clk_LED = counter[3];
+`endif
+    // Std. Emulation wrapper: Stimulus & Output capture for DUT
+    parameter   NUM_STIM_ARRAY  = 4,
+                NUM_OUT_ARRAY   = 3;
+    reg [7:0]   stimIn[0:NUM_STIM_ARRAY-1];
+    reg [7:0]   vectOut[0:NUM_OUT_ARRAY-1];
+    reg [7:0]   Dout_emu;
+    
+    // DUT interface: registered input
     reg [ 7:0]  Cin;
     reg [ 7:0]  Xin;
     reg [15:0]  Yin;
+    // DUT interface: output wire. DUT's output will be captured
     reg [ 7:0]  Xout;
     reg [15:0]  Yout;
 
-    // Emulation Transactor
+    // Emulation Transactor ---------------------------------------------
     always @(posedge clk_emu)
     begin
         if (load_emu)   // Input stimulus to DUT
@@ -40,19 +56,10 @@ module fir_pe_wrapper(Data_In, Data_Out, Addr, load_emu, get_emu, clk_emu, clk_d
         end
         else
         begin
-            stimIn[Addr] <= Data_In;
-            Data_Out <= vectOut[Addr];
+            stimIn[Addr_emu] <= Din_emu;
+            Dout_emu <= vectOut[Addr_emu];
         end
     end
-
-    // This is for blinking LED
-    reg [3:0] counter;
-    always @(posedge clk_dut)
-    begin
-        counter <= counter + 1;
-    end
-    // Read-back DUT output
-    assign clk_LED = counter[3];   // Monitor emulation process
     
     // DUT
     fir_pe u_fir_pe(

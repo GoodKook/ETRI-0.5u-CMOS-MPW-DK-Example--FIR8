@@ -1,6 +1,6 @@
 ### Yosys taargetting Xilinx
+read_verilog -DEMU_MONITOR ../../fir_pe_wrapper.v
 read_verilog ../../../source/fir_pe.v
-read_verilog ../../fir_pe_wrapper.v
 
 hierarchy -check -top fir_pe_wrapper
 synth_xilinx -top fir_pe_wrapper -family xc7 -flatten

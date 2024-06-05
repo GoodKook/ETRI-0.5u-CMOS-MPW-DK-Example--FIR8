@@ -26,10 +26,8 @@ SC_MODULE(E_fir_pe)
     sc_in<sc_uint<16> >     Yin;
     sc_out<sc_uint<16> >    Yout;
 
-    sc_signal<uint16_t>     _Yout;
-
 #define N_TX    4
-#define N_RX    5
+#define N_RX    3
 
     void pe_thread(void)
     {
@@ -38,10 +36,10 @@ SC_MODULE(E_fir_pe)
         while(true)
         {
             wait(clk.posedge_event());
-            txPacket[0] = (uint8_t)(Yin.read());    // LSB of Yin
-            txPacket[1] = (uint8_t)(Yin.read()>>8); // MSB of Yin
-            txPacket[2] = (uint8_t)Xin.read();      // Xin
-            txPacket[3] = (uint8_t)Cin.read();      // Cin
+            txPacket[3] = (uint8_t)(Yin.read());    // LSB of Yin
+            txPacket[2] = (uint8_t)(Yin.read()>>8); // MSB of Yin
+            txPacket[1] = (uint8_t)Xin.read();      // Xin
+            txPacket[0] = (uint8_t)Cin.read();      // Cin
 
             // Send to Emulator
             for (int i=0; i<N_TX; i++)
@@ -56,9 +54,8 @@ SC_MODULE(E_fir_pe)
                 rxPacket[i] = y;
             }
 
-           _Yout.write((uint16_t)rxPacket[1]<<8 | (uint16_t)rxPacket[0]);
-            Yout.write((uint16_t)rxPacket[3]<<8 | (uint16_t)rxPacket[2]);
-            Xout.write( (uint8_t)rxPacket[4]);
+            Xout.write( (uint8_t)rxPacket[0]);
+            Yout.write((uint16_t)rxPacket[1]<<8 | (uint16_t)rxPacket[2]);
         }
     }
 
@@ -69,7 +66,7 @@ SC_MODULE(E_fir_pe)
     SC_CTOR(E_fir_pe):
         clk("clk"),
         Cin("Cin"), Xin("Xin"), Xout("Xout"),
-        Yin("Yin"), Yout("Yout"), _Yout("_Yout")
+        Yin("Yin"), Yout("Yout")
     {
         SC_THREAD(pe_thread);
         sensitive << clk;
@@ -80,10 +77,10 @@ SC_MODULE(E_fir_pe)
         if (fd < 0)
         {
             perror("Error opening serial port");
-            //return -1;
+            return;
         }
         // Set up serial port
-        options.c_cflag = B9600 | CS8 | CLOCAL | CREAD;
+        options.c_cflag = B115200 | CS8 | CLOCAL | CREAD;
         options.c_iflag = IGNPAR;
         options.c_oflag = 0;
         options.c_lflag = 0;
