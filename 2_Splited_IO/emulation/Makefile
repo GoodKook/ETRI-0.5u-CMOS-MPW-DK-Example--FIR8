@@ -72,6 +72,7 @@ wave :
 
 clean :
 	rm -rf $(TARGET_DIR)
+	rm -f *.txt
 	rm -f *.vcd
 
 clean_all :

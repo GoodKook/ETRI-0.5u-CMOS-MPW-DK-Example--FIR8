@@ -39,9 +39,9 @@ SC_MODULE(E_fir_pe)
         {
             // Positive edge Clock
             wait(clk.posedge_event());
-            txPacket[0] = (uint8_t)Rdy.read();
-            txPacket[1] = (uint8_t)Cin.read();      // Cin
-            txPacket[2] = (uint8_t)(Xin.read())<<4 | (uint8_t)(Yin.read()); // Xin | Yin
+            txPacket[0] = (uint8_t)Cin.read();      // Cin
+            txPacket[1] = (uint8_t)(Yin.read())<<4 | (uint8_t)(Xin.read()); // Yin | Xin
+            txPacket[2] = (uint8_t)Rdy.read();
 
             // Send to Emulator
             for (int i=0; i<N_TX; i++)
@@ -56,9 +56,9 @@ SC_MODULE(E_fir_pe)
                 rxPacket[i] = y;
             }
 
-            Vld.write(rxPacket[0]? true:false);
-            Xout.write((sc_uint<4>)(rxPacket[1]>>4));
-            Yout.write((sc_uint<4>)(rxPacket[1] & 0x0F));
+            Yout.write((sc_uint<4>)(rxPacket[0]>>4));
+            Xout.write((sc_uint<4>)(rxPacket[0] & 0x0F));
+            Vld.write(rxPacket[1]? true:false);
         }
     }
 
@@ -83,7 +83,7 @@ SC_MODULE(E_fir_pe)
             return;
         }
         // Set up serial port
-        options.c_cflag = B9600 | CS8 | CLOCAL | CREAD;
+        options.c_cflag = B115200 | CS8 | CLOCAL | CREAD;
         options.c_iflag = IGNPAR;
         options.c_oflag = 0;
         options.c_lflag = 0;

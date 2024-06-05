@@ -6,22 +6,15 @@
 /* verilator lint_off UNUSEDSIGNAL */
 /* verilator lint_off UNDRIVEN */
 
-`ifdef EMULATION
-module fir_pe (clk, Cin, Xin, Xout, Yin, Yout, Rdy, Vld, Vld_LED);
-`else
 module fir_pe (clk, Cin, Xin, Xout, Yin, Yout, Rdy, Vld);
-`endif
-input           clk;
-input   [7:0]   Cin;
-input   [3:0]   Xin;
-output  [3:0]   Xout;
-input   [3:0]   Yin;
-output  [3:0]   Yout;
-input           Rdy;
-output          Vld;
-`ifdef EMULATION
-output          Vld_LED;
-`endif
+    input           clk;
+    input   [7:0]   Cin;
+    input   [3:0]   Xin;
+    output  [3:0]   Xout;
+    input   [3:0]   Yin;
+    output  [3:0]   Yout;
+    input           Rdy;
+    output          Vld;
 
     // Load Control --------------------------------------------
     integer i;
@@ -38,9 +31,7 @@ output          Vld_LED;
             LoadCtl[i+1] <= LoadCtl[i];
     end
     assign Vld = LoadCtl[4];
-`ifdef EMULATION
-    assign Vld_LED = LoadCtl[4];
-`endif
+
     // Xin -----------------------------------------------------
     reg     [3:0]   XinL, XinH;
     always @(posedge clk)
